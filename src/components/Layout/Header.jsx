@@ -1,17 +1,18 @@
 // src/components/Layout/Header.jsx
-import React, { useState } from 'react';
+import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box, Container, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom'; // Importation de useNavigate pour la redirection
-import { users } from '../../data/users'; // Importation des utilisateurs test
+import { Link } from 'react-router-dom'; // Pour la navigation
+import { useDispatch, useSelector } from 'react-redux'; // Importation de hooks pour Redux
+import { login, logout } from '../../store/userSlice'; // Import des actions Redux
+import { users } from '../../data/users'; // Import des utilisateurs
 
 const Header = () => {
-  const [open, setOpen] = useState(false); // Gère l'ouverture de la modale
-  const [email, setEmail] = useState(''); // État pour l'email
-  const [password, setPassword] = useState(''); // État pour le mot de passe
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Gère l'état de connexion
-  const [currentUser, setCurrentUser] = useState(null); // Gère l'utilisateur actuellement connecté
+  const dispatch = useDispatch();
+  const { isLoggedIn, currentUser } = useSelector((state) => state.user); // Accéder à l'état utilisateur depuis Redux
 
-  const navigate = useNavigate(); // Hook pour la redirection
+  const [open, setOpen] = React.useState(false); // Gère l'ouverture de la modale
+  const [email, setEmail] = React.useState(''); // État pour l'email
+  const [password, setPassword] = React.useState(''); // État pour le mot de passe
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -22,24 +23,21 @@ const Header = () => {
   };
 
   const handleLogin = () => {
-    // Chercher l'utilisateur par email et mot de passe
-    const user = users.find((user) => user.email === email && user.password === password);
+    // Chercher l'utilisateur par email et mot de passe dans le fichier users.js
+    const user = users.find(
+      (user) => user.email === email && user.password === password
+    );
     if (user) {
-      setIsLoggedIn(true); // Marquer l'utilisateur comme connecté
-      setCurrentUser(user); // Sauvegarder l'utilisateur connecté
-      setOpen(false); // Fermer la modale
-      navigate('/'); // Rediriger vers la page d'accueil de l'utilisateur (dashboard)
-      console.log('Utilisateur connecté :', user.name);
+      // Dispatch de l'action login avec l'utilisateur et ses appartements
+      dispatch(login({ user, apartments: user.apartments }));
+      setOpen(false); // Fermer la modale après la connexion
     } else {
       alert('Identifiants incorrects');
     }
   };
 
   const handleLogOut = () => {
-    setIsLoggedIn(false); // Déconnexion
-    setCurrentUser(null); // Effacer l'utilisateur actuel
-    navigate('/'); // Rediriger vers la page d'accueil (connexion)
-    console.log('Utilisateur déconnecté');
+    dispatch(logout()); // Dispatch de l'action de déconnexion
   };
 
   return (
@@ -67,39 +65,39 @@ const Header = () => {
             </Box>
           </Container>
         </Toolbar>
-
-        {/* Modale de connexion */}
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Connexion</DialogTitle>
-          <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              label="Email"
-              type="email"
-              fullWidth
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <TextField
-              margin="dense"
-              label="Mot de passe"
-              type="password"
-              fullWidth
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Annuler
-            </Button>
-            <Button onClick={handleLogin} color="primary">
-              Se connecter
-            </Button>
-          </DialogActions>
-        </Dialog>
       </AppBar>
+
+      {/* Modale de connexion */}
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Connexion</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Email"
+            type="email"
+            fullWidth
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+            margin="dense"
+            label="Mot de passe"
+            type="password"
+            fullWidth
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Annuler
+          </Button>
+          <Button onClick={handleLogin} color="primary">
+            Se connecter
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
