@@ -3,7 +3,8 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import About from '../pages/About';
-import Layout from '../components/Layout/Layout'; // Importation du layout
+import Dashboard from '../pages/Dashboard'; // Importation du Dashboard
+import Layout from '../components/Layout/Layout';
 
 const AppRoutes = () => {
   return (
@@ -11,7 +12,7 @@ const AppRoutes = () => {
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        {/* Ajouter d'autres routes ici */}
+        <Route path="/dashboard" element={<Dashboard />} /> {/* Route vers le Dashboard */}
       </Route>
     </Routes>
   );
