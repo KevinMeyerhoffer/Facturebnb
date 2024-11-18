@@ -8,7 +8,7 @@ import { users } from '../../data/users'; // Import des utilisateurs
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { isLoggedIn, currentUser } = useSelector((state) => state.user); // Accéder à l'état utilisateur depuis Redux
+  const { isLoggedIn, currentUser } = useSelector((state) => state.user); // Accéder à l'état de l'utilisateur depuis Redux
 
   const [open, setOpen] = React.useState(false); // Gère l'ouverture de la modale
   const [email, setEmail] = React.useState(''); // État pour l'email
@@ -28,8 +28,17 @@ const Header = () => {
       (user) => user.email === email && user.password === password
     );
     if (user) {
-      // Dispatch de l'action login avec l'utilisateur et ses appartements
-      dispatch(login({ user, apartments: user.apartments }));
+      // Générer un token (dans une vraie appli, ce serait un JWT)
+      const token = `fake-token-${email}-${Date.now()}`;
+      
+      // Envoi des informations de l'utilisateur à Redux, en excluant le mot de passe
+      const { password, ...userWithoutPassword } = user; // Exclure le mot de passe
+      // Stocker le token dans localStorage (ou sessionStorage)
+      localStorage.setItem('authToken', token);
+      
+      // Dispatch de l'action login avec l'utilisateur sans le mot de passe et le token
+      dispatch(login({ user: userWithoutPassword, token }));
+
       setOpen(false); // Fermer la modale après la connexion
     } else {
       alert('Identifiants incorrects');
@@ -37,6 +46,8 @@ const Header = () => {
   };
 
   const handleLogOut = () => {
+    // Effacer le token de localStorage lors de la déconnexion
+    localStorage.removeItem('authToken');
     dispatch(logout()); // Dispatch de l'action de déconnexion
   };
 

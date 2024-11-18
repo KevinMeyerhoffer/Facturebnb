@@ -7,15 +7,18 @@ export const userSlice = createSlice({
   initialState: {
     isLoggedIn: false,
     currentUser: null, // Informations de l'utilisateur
+    token: null, // Token d'authentification
   },
   reducers: {
     login: (state, action) => {
       state.isLoggedIn = true;
       state.currentUser = action.payload.user; // Sauvegarder l'utilisateur connecté
+      state.token = action.payload.token; // Sauvegarder le token d'authentification
     },
     logout: (state) => {
       state.isLoggedIn = false;
       state.currentUser = null; // Effacer l'utilisateur
+      state.token = null; // Effacer le token
     },
   },
 });
