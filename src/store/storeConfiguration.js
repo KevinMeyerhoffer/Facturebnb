@@ -6,7 +6,6 @@ const store = configureStore({
   reducer: {
     user: userReducer, // Ajouter le reducer de l'utilisateur
   },
-  devTools: process.env.NODE_ENV !== "production", // Activer en mode développement
 });
 
 export default store;

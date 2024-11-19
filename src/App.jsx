@@ -1,11 +1,10 @@
-// src/App.jsx
 import React from 'react';
 import { Provider } from 'react-redux'; // Import du Provider pour Redux
 import { ThemeProvider } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material'; // Applique les styles globaux de MUI
+import { CssBaseline } from '@mui/material';
 import theme from './themes/theme'; // Importation du thème personnalisé
 import AppRoutes from './routes/routes'; // Importation des routes
-import store from './store/storeConfiguration'; // Importation du store Redux avec un nom explicite
+import store from './store/storeConfiguration'; // Import du store Redux
 
 const App = () => {
   return (
