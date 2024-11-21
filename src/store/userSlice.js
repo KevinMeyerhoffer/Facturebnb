@@ -20,6 +20,16 @@ export const userSlice = createSlice({
       state.currentUser = null; // Effacer l'utilisateur
       state.token = null; // Effacer le token
     },
+
+    updateUserSettings: (state, action) => {
+      if (state.currentUser) {
+        state.currentUser = {
+          ...state.currentUser,
+          ...action.payload,
+        };
+      }
+    },
+
     // Action pour mettre à jour les informations d'un appartement spécifique
     updateApartment: (state, action) => {
       const { apartmentId, data } = action.payload;
@@ -40,7 +50,8 @@ export const userSlice = createSlice({
 });
 
 // Export des actions
-export const { login, logout, updateApartment } = userSlice.actions;
+export const { login, logout, updateApartment, updateUserSettings } =
+  userSlice.actions;
 
 // Export du reducer pour le store
 export default userSlice.reducer;

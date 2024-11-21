@@ -23,6 +23,11 @@ const ApartmentDetail = () => {
 
   return (
     <Container>
+      <Link to={`/dashboard`} style={{ textDecoration: 'none' }}>
+        <Button variant="outlined" color="primary" style={{ marginBottom: '20px' }}>
+          Retour au Dashboard
+        </Button>
+      </Link>
       <Typography variant="h4" gutterBottom>Détails de l'appartement</Typography>
       <Card>
         <CardContent>

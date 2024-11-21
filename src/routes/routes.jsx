@@ -12,6 +12,7 @@ import Invoice from '../pages/Invoice'; // Importation de Invoice
 import Reservation from '../pages/Reservation'; // Importation de Reservation
 import NotFound from '../pages/404'; // Importation de la page 404
 import { useSelector } from 'react-redux';
+import UserSettings from '../pages/UserSettings';
 
 const AppRoutes = () => {
   const { isLoggedIn } = useSelector((state) => state.user); // Vérifie l'état de connexion
@@ -22,6 +23,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to="/404" />} />
+        <Route path="/user-Settings" element={isLoggedIn ? <UserSettings /> : <Navigate to="/404" />} />
         <Route path="/apartment/:apartmentId" element={isLoggedIn ? <ApartmentDetail /> : <Navigate to="/404" />} />
         
         {/* Pages de l'appartement */}

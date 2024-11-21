@@ -10,6 +10,14 @@ const Dashboard = () => {
   return (
     <Container>
       <Typography variant="h4" gutterBottom>Bienvenue sur votre Dashboard !</Typography>
+
+      {/* Bouton "Paramètres utilisateur" */}
+      <Link to="/user-settings" style={{ textDecoration: 'none' }}>
+        <Button variant="contained" color="primary" style={{ marginBottom: '20px' }}>
+          Paramètres utilisateur
+        </Button>
+      </Link>
+      
       <Typography variant="h6" gutterBottom>Voici vos appartements :</Typography>
       
       {apartments && apartments.length > 0 ? (
