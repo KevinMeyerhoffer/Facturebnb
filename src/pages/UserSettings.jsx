@@ -13,22 +13,22 @@ const UserSettings = () => {
 
   // Initialiser les données de l'utilisateur
   const [formData, setFormData] = useState({
-    firstName: currentUser ? currentUser.firstName : '',
-    lastName: currentUser ? currentUser.lastName : '',
-    email: currentUser ? currentUser.email : '',
+    firstName: '',
+    lastName: '',
+    email: '',
     // Ajouter d'autres champs de paramètres utilisateur ici si nécessaire
   });
 
   useEffect(() => {
     if (currentUser) {
       setFormData({
-        firstName: currentUser.firstName,
-        lastName: currentUser.lastName,
-        email: currentUser.email,
-        // Mettre à jour les autres champs ici
+        firstName: currentUser.firstName || '',
+        lastName: currentUser.lastName || '',
+        email: currentUser.email || '',
       });
     }
   }, [currentUser]);
+  
 
   // Mise à jour des champs du formulaire
   const handleChange = (e) => {
