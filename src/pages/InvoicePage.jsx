@@ -11,8 +11,8 @@ const InvoicePage = () => {
   const { apartmentId } = useParams(); // Récupérer l'ID de l'appartement depuis l'URL
   
   // Log pour vérifier la valeur de apartmentId
-  console.log('Apartment ID:', apartmentId); // Devrait être un string venant de l'URL
-  console.log('User ID:', userId.id);
+  // console.log('Apartment ID:', apartmentId); // Devrait être un string venant de l'URL
+  // console.log('User ID:', userId.id);
 
   // Conversion de apartmentId en nombre (si c'est un string)
   const apartmentIdNumber = Number(apartmentId);
@@ -23,7 +23,7 @@ const InvoicePage = () => {
   );
 
   // Log pour vérifier les factures après filtrage
-  console.log('Filtered Invoices:', apartmentInvoices);
+  // console.log('Filtered Invoices:', apartmentInvoices);
 
   // État pour gérer l'ouverture et la fermeture de la modale
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
