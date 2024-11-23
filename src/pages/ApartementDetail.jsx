@@ -23,6 +23,11 @@ const ApartmentDetail = () => {
 
   return (
     <Container>
+      <Link to={`/dashboard`} style={{ textDecoration: 'none' }}>
+        <Button variant="outlined" color="primary" style={{ marginBottom: '20px' }}>
+          Retour au Dashboard
+        </Button>
+      </Link>
       <Typography variant="h4" gutterBottom>Détails de l'appartement</Typography>
       <Card>
         <CardContent>
@@ -35,9 +40,6 @@ const ApartmentDetail = () => {
           <div style={{ marginTop: '20px' }}>
             <Link to={`/apartment/${apartment.id}/settings`} style={{ textDecoration: 'none', marginRight: '10px' }}>
               <Button variant="outlined" color="primary">Réglages</Button>
-            </Link>
-            <Link to={`/apartment/${apartment.id}/owner`} style={{ textDecoration: 'none', marginRight: '10px' }}>
-              <Button variant="outlined" color="primary">Propriétaire</Button>
             </Link>
             <Link to={`/apartment/${apartment.id}/invoice`} style={{ textDecoration: 'none', marginRight: '10px' }}>
               <Button variant="outlined" color="primary">Facture</Button>

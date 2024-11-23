@@ -1,13 +1,14 @@
 // src/pages/ApartmentSettings.jsx
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'; // Accès à Redux
-import { useParams, Link } from 'react-router-dom'; // Récupération de l'ID de l'appartement
+import { useParams, Link, useNavigate} from 'react-router-dom'; // Récupération de l'ID de l'appartement
 import { Button, Container, TextField, Grid, Checkbox, FormControlLabel, Typography, Card, CardContent } from '@mui/material';
 import { updateApartment } from '../store/userSlice'; // Importer l'action updateApartment
 
 const ApartmentSettings = () => {
   const { apartmentId } = useParams(); // Récupérer l'ID de l'appartement
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Hook de redirection
 
   // Récupérer l'appartement depuis Redux
   const { apartments } = useSelector((state) => state.user.currentUser || {});
@@ -58,6 +59,7 @@ const ApartmentSettings = () => {
     // Action pour mettre à jour l'appartement dans Redux
     dispatch(updateApartment({ apartmentId: apartment.id, data: formData }));
     alert('Les informations ont été mises à jour avec succès !');
+    navigate(`/apartment/${apartment.id}`);
   };
 
   return (
