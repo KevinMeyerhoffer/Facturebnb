@@ -41,9 +41,6 @@ const ApartmentDetail = () => {
             <Link to={`/apartment/${apartment.id}/settings`} style={{ textDecoration: 'none', marginRight: '10px' }}>
               <Button variant="outlined" color="primary">Réglages</Button>
             </Link>
-            <Link to={`/apartment/${apartment.id}/owner`} style={{ textDecoration: 'none', marginRight: '10px' }}>
-              <Button variant="outlined" color="primary">Propriétaire</Button>
-            </Link>
             <Link to={`/apartment/${apartment.id}/invoice`} style={{ textDecoration: 'none', marginRight: '10px' }}>
               <Button variant="outlined" color="primary">Facture</Button>
             </Link>
