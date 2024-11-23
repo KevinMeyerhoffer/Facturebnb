@@ -21,7 +21,7 @@ export const reservations = [
     reservationNumber: "RES-002",
     platform: "Booking",
     firstName: "Jane",
-    lastName: "Doevdvdfd",
+    lastName: "Doe",
     checkIn: "2024-06-10",
     checkOut: "2024-06-12",
     totalAmount: 150,
@@ -65,7 +65,7 @@ export const reservations = [
     caAfterCommission: 344,
     conciergeTotal: 40,
     vat: 0.2,
-    apartmentId: 2,
-    userId: 2,
+    apartmentId: 1,
+    userId: 3,
   },
 ];
